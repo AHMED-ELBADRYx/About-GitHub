@@ -267,7 +267,9 @@ git pull origin
 
 ```sh
 git config --list
+```
 # أو
+```sh
 git config -l
 ```
 
