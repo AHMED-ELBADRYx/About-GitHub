@@ -239,6 +239,60 @@ git pull origin
 
 ---
 
+
+---
+
+### 15. معالجة خطأ non-fast-forward عند push
+
+🛑 قد يظهر الخطأ:
+
+! [rejected] main -> main (non-fast-forward) error: failed to push some refs to '...' hint: Updates were rejected because the tip of your current branch is behind...
+
+✏ معناه أن الفرع البعيد يحتوي تغييرات غير موجودة محليًا.
+
+✅ يوجد 3 حلول:
+
+1. دمج التغييرات من GitHub:
+
+```sh
+git pull origin main
+git push origin main
+```
+
+2. استخدام rebase لدمج مرتب:
+
+```sh
+git pull origin main --rebase
+git push origin main
+```
+
+3. الكتابة فوق المستودع البعيد بالقوة (تحذير: سيحذف تاريخ GitHub غير الموجود محليًا):
+
+```sh
+git push -u origin main --force
+```
+
+---
+
+
+---
+
+### 16. في حال ظهور خطأ "refusing to merge unrelated histories"
+
+🔴 قد يظهر هذا الخطأ إذا كنت تحاول دمج مشروع محلي بمستودع بعيد يحتوي ملفات مسبقًا (مثل README أو LICENSE).
+
+🛠 الحل:
+
+```sh
+git pull origin main --allow-unrelated-histories
+```
+
+✅ هذا الأمر يسمح بدمج تاريخين منفصلين (local وremote) دون اعتراض من Git.
+
+---
+
+
+---
 # إعدادات Git
 
 ## الاستعلام عن إعدادات Git الحالية
