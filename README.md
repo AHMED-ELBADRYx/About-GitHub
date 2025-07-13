@@ -153,11 +153,15 @@ git status
 ```sh
 git add HTML/index.html CSS/style.css
 ```
-# أو لإضافة جميع الملفات:
+# أو لإضافة جميع الملفات المباشرة:
 ```sh
 git add *
 ```
 
+# أو لإضافة جميع الملفات حتى وأن كانت داخل مجلدات أخرى:
+```sh
+git add .
+```
 
 ---
 
@@ -199,34 +203,7 @@ git remote -v
 
 ---
 
-### 11. رفع الملفات إلى GitHub:
-
-```sh
-git push origin main
-```
-
-
----
-
-### 12. ربط الفرع المحلي بالبعيد (أول مرة فقط):
-
-```sh
-git push -u origin main
-```
-
-
----
-
-### 13. في المشاريع التالية يمكنك الاكتفاء بـ:
-
-```sh
-git push
-```
-
-
----
-
-### 14. جلب الملفات الجديدة من GitHub (مثلاً إذا أنشأت README من الموقع):
+### 11. جلب الملفات الجديدة من GitHub (مثلاً إذا أنشأت README من الموقع):
 
 ```sh
 git pull origin
@@ -237,10 +214,37 @@ git pull origin
 - fetch: جلب الملفات.
 - merge: دمجها بالمجلد المحلي.
 
+قد يحتاج Git لإثبات الهوية أولًا على حسب نوع الرابط الذي أدخلناه
 ---
 
 
+### 12. رفع الملفات إلى GitHub:
+
+```sh
+git push origin main
+```
+
+
 ---
+
+### 13. ربط الفرع المحلي بالبعيد (أول مرة فقط):
+
+```sh
+git push -u origin main
+```
+
+
+---
+
+### 14. في المشاريع التالية يمكنك الاكتفاء بـ:
+
+```sh
+git push
+```
+
+
+---
+
 
 ### 15. معالجة خطأ non-fast-forward عند push
 
@@ -287,7 +291,7 @@ git push -u origin main --force
 git pull origin main --allow-unrelated-histories
 ```
 
-✅ هذا الأمر يسمح بدمج تاريخين منفصلين (local وremote) دون اعتراض من Git.
+✅ هذا الأمر يسمح بدمج تاريخين منفصلين (local وremote) دون اعتراض من Git، بمجرد الضغط على Enter وإثبات الهوية سيقوم بفتح ملف يمكن إغلاقه كما هو
 
 ---
 
@@ -462,11 +466,20 @@ git branch -m master main
 
 ---
 
+## ✅ إعادة التسمية بالقوة حتى لو كان الفرع موجودًا:
+
+```sh
+git branch -M main
+```
+
+---
+
 ## جعل الفرع الافتراضي دائمًا باسم main
 
 ```sh
 git config --global init.defaultBranch main
 ```
+❌ لكنه لا يغير الأسماء السابقة
 
 ---
 
@@ -477,7 +490,7 @@ git config --global init.defaultBranch main
 
 ---
 
-## ربط المستودع المحلي بمستودع GitHub عبر SSH
+## ربط المستودع المحلي بمستودع GitHub عبر SSH بعد الانتهاء من عمل commit
 
 ```sh
 git remote add origin git@github.com:USERNAME/REPO.git
@@ -543,6 +556,17 @@ git pull origin main --rebase
 git push -u origin main --force
 ```
 
+# وبهذا كلما أردنا دفع التغييرات إلى GitHub ندخل إلى المجلد الخاص بها ثم:
+
+```sh
+git init
+git add .
+git commit -m "commit"
+git remote add origin git@github.com:USERNAME/Repo.git
+git pull origin main
+git push -u origin main
+--> في المرات التالية يصبح: git push فقط
+```
 ---
 
 # التعامل مع الفروع المحلية
